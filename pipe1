@@ -34,10 +34,11 @@ pipeline {
           steps {
               echo"==============////////////===================="
               git 'https://github.com/lynda-cheheb/azul.git'
-              sh 'cd tpMvn'
-              sh 'mvn -Dmaven.test.failure.ignore=true clean package'
-              sh 'mvn -v'
-              sh 'java -version'
+              sh ''' cd tpMvn
+              ls -la tpMvn
+              mvn -Dmaven.test.failure.ignore=true clean package
+              mvn -v
+              java -version '''
           }
       }
    }
