@@ -33,7 +33,7 @@ pipeline {
           }
           steps {
               echo"==============////////////===================="
-              git 'https://github.com/lynda-cheheb/azul.git'
+              sh 'git clone https://github.com/lynda-cheheb/azul.git'
               sh ''' cd tpMvn
               ls -la tpMvn
               mvn -Dmaven.test.failure.ignore=true clean package
