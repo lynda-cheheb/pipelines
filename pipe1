@@ -1,0 +1,41 @@
+pipeline {
+    environment {
+        registry = "berberose/dockerpipeline-lyly"
+        registryCredential = 'docker-hub'
+        dockerImage = ''
+    }
+    agent any
+    stages {
+        stage('Cloning Git'){
+            steps {
+                git 'https://github.com/lynda-cheheb/dockerfile.git'
+            }
+        }   
+        stage('Building-Image') {
+            steps {
+                script {
+                   dockerImage = docker.build registry + ":1.0"
+          }
+         }
+      }
+      stage('Deploy-Image'){
+          steps {
+              script {
+                  docker.withRegistry('', registryCredential){
+                      dockerImage.push()
+                  }
+              }
+          }
+      }
+      stage('Pull image'){
+          agent {
+              docker  'berberose/dockerpipeline-lyly:1.0'
+          }
+          steps {
+              echo"==============////////////===================="
+              git 'https://github.com/lynda-cheheb/azul.git'
+              
+          }
+      }
+   }
+}
