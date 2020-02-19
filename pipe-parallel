@@ -1,0 +1,33 @@
+node ('node1') { 
+    def  registry = "berberose/dockerpipeline-lyly"
+    def  registryCredential = 'docker-hub'
+    def  dockerImage = ''
+    stage() {
+     parallel (
+      'cloning and build' : {
+        stage('Cloning Git'){       
+                git credentialsId: 'Jenkinsfile', url: 'https://github.com/lynda-cheheb/dockerAndJenkinsFiles.git'           
+        }   
+        stage('Building-Image') {        
+                script {
+                   dockerImage = docker.build registry + ":1.0"        
+         }
+      }
+      },
+      'Deploy' : {
+      stage('Deploy-Image'){
+                script{
+                  docker.withRegistry('', registryCredential){
+                      dockerImage.push()             
+          }
+      }
+      }
+    }
+      stage('test docker') {
+        docker.image('berberose/dockerpipeline-lyly:1.0').inside {
+            git 'https://github.com/lynda-cheheb/hello_world_maven2.git'
+            sh 'mvn clean package'
+        }
+     }
+    }
+    }
