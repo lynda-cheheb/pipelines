@@ -1,28 +1,19 @@
 node () {
     def  registry = "berberose/dockerpipeline-lyly"
-    def    registryCredential = 'docker-hub'
-    def    dockerImage = ''
+    def  registryCredential = 'docker-hub'
+    def  dockerImage = ''
     
-        stage('Cloning Git'){
-        
-                git 'https://github.com/lynda-cheheb/dockerfile.git'
-            
+        stage('Cloning Git'){       
+                git url: 'https://github.com/lynda-cheheb/dockerfile.git'           
         }   
-        stage('Building-Image') {
-            
-            steps {
+        stage('Building-Image') {        
                 script {
-                   dockerImage = docker.build registry + ":1.0"
-          }
+                   dockerImage = docker.build registry + ":1.0"        
          }
       }
       stage('Deploy-Image'){
-          steps {
-              script {
                   docker.withRegistry('', registryCredential){
-                      dockerImage.push()
-                  }
-              }
+                      dockerImage.push()             
           }
       }
       stage('Pull image'){
