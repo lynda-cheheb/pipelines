@@ -34,7 +34,6 @@ pipeline {
           steps {
               echo"==============////////////===================="
               sh ''' 
-              mvn -Dmaven.test.failure.ignore=true clean package
               mvn -v
               java -version '''
           }
