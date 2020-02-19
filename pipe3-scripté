@@ -20,6 +20,7 @@ node () {
 node (docker:'berberose/dockerpipeline-lyly:1.0') {
   stage('Pull image'){  
               sh ''' 
+              echo err.message
               mvn -v
               java -version '''
           }
