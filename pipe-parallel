@@ -6,12 +6,12 @@ node ('node1') {
         stage('Cloning Git'){       
                 git credentialsId: 'Jenkinsfile', url: 'https://github.com/lynda-cheheb/dockerAndJenkinsFiles.git'           
                              }
-       parallel 'cloning and build and deploy': {
         stage('Building-Image') {        
                 script {
                    dockerImage = docker.build registry + ":1.0"        
                        }
                                 }
+     parallel 'deploy': {
       stage('Deploy-Image'){
                 script{
                   docker.withRegistry('', registryCredential){
