@@ -33,9 +33,7 @@ pipeline {
           }
           steps {
               echo"==============////////////===================="
-              sh ''' cd azul 
-              ls -la tpMvn
-              cd tpMvn
+              sh ''' 
               mvn -Dmaven.test.failure.ignore=true clean package
               mvn -v
               java -version '''
