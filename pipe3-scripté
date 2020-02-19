@@ -17,9 +17,8 @@ node () {
           }
       }   
 }
-node (docker:'berberose/dockerpipeline-lyly:1.0') {
+node (docker:'berberose/dockerpipeline-lyly:latest') {
   stage('Pull image'){  
-              echo"==============////////////===================="
               sh ''' 
               mvn -v
               java -version '''
