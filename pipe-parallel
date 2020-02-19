@@ -3,8 +3,7 @@ node ('node1') {
     def  registryCredential = 'docker-hub'
     def  dockerImage = ''
     stage() {
-     parallel 
-      'cloning and build and deploy' : {
+     parallel 'cloning and build and deploy': {
         stage('Cloning Git'){       
                 git credentialsId: 'Jenkinsfile', url: 'https://github.com/lynda-cheheb/dockerAndJenkinsFiles.git'           
         }   
@@ -12,6 +11,7 @@ node ('node1') {
                 script {
                    dockerImage = docker.build registry + ":1.0"        
          }
+        }
       stage('Deploy-Image'){
                 script{
                   docker.withRegistry('', registryCredential){
@@ -19,8 +19,9 @@ node ('node1') {
                    }
                  }
              }
+            } 
     },
-    'TEST' : {
+    'TEST': {
       stage('test docker') {
         docker.image('berberose/dockerpipeline-lyly:1.0').inside {
             git 'https://github.com/lynda-cheheb/hello_world_maven2.git'
