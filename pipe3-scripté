@@ -1,9 +1,8 @@
 node () {
-    def {
-        registry = "berberose/dockerpipeline-lyly"
-        registryCredential = 'docker-hub'
-        dockerImage = ''
-    }
+    def  registry = "berberose/dockerpipeline-lyly"
+    def    registryCredential = 'docker-hub'
+    def    dockerImage = ''
+    
         stage('Cloning Git'){
         
                 git 'https://github.com/lynda-cheheb/dockerfile.git'
