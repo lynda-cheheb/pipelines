@@ -12,8 +12,8 @@ node ('node1') {
                 script {
                    dockerImage = docker.build registry + ":1.0"        
          }
-      }
       },
+    
       'Deploy' : {
       stage('Deploy-Image'){
                 script{
@@ -22,7 +22,7 @@ node ('node1') {
           }
       }
       }
-    }
+    })
       stage('test docker') {
         docker.image('berberose/dockerpipeline-lyly:1.0').inside {
             git 'https://github.com/lynda-cheheb/hello_world_maven2.git'
