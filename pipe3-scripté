@@ -19,7 +19,7 @@ node () {
       } 
     }
       stage('test docker') {
-        docker.image('berberose/dockerpipeline-lyly:latest').inside {
+        docker.image('berberose/dockerpipeline-lyly:1.0t').inside {
             sh 'mvn --version'
         }
     }
