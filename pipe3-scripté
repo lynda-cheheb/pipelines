@@ -16,7 +16,8 @@ node () {
                   docker.withRegistry('', registryCredential){
                       dockerImage.push()             
           }
-      }   
+      } 
+    }
 }
 node (docker:'berberose/dockerpipeline-lyly:1.0') {
   stage('Pull image'){  
