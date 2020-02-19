@@ -3,10 +3,10 @@ node ('node1') {
     def  registryCredential = 'docker-hub'
     def  dockerImage = ''
     stage() {
-     parallel 'cloning and build and deploy': {
         stage('Cloning Git'){       
                 git credentialsId: 'Jenkinsfile', url: 'https://github.com/lynda-cheheb/dockerAndJenkinsFiles.git'           
-                             }   
+                             }
+       parallel 'cloning and build and deploy': {
         stage('Building-Image') {        
                 script {
                    dockerImage = docker.build registry + ":1.0"        
