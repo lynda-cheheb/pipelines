@@ -12,6 +12,7 @@ node () {
          }
       }
       stage('Deploy-Image'){
+                script{
                   docker.withRegistry('', registryCredential){
                       dockerImage.push()             
           }
