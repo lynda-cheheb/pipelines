@@ -6,27 +6,26 @@ node ('node1') {
      parallel 'cloning and build and deploy': {
         stage('Cloning Git'){       
                 git credentialsId: 'Jenkinsfile', url: 'https://github.com/lynda-cheheb/dockerAndJenkinsFiles.git'           
-        }   
+                             }   
         stage('Building-Image') {        
                 script {
                    dockerImage = docker.build registry + ":1.0"        
-         }
-        }
+                       }
+                                }
       stage('Deploy-Image'){
                 script{
                   docker.withRegistry('', registryCredential){
                       dockerImage.push()             
-                   }
-                 }
-             }
-            } 
+                                                              }
+                      }
+                           }
     },
     'TEST': {
       stage('test docker') {
         docker.image('berberose/dockerpipeline-lyly:1.0').inside {
             git 'https://github.com/lynda-cheheb/hello_world_maven2.git'
             sh 'mvn clean package'
-        }
-     }
+                                  }
+                           }
     }
  }
